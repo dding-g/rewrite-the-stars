@@ -11,7 +11,6 @@ export const gemini = async (
     contents: [{ parts: [{ text: prompt }] }],
     generationConfig: generationConfig ?? {},
   };
-  console.log(body);
 
   try {
     const response = await fetch(
@@ -41,7 +40,6 @@ export const gemini = async (
     }
 
     const textResponse = ret.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
-    console.log(textResponse);
     return textResponse;
   } catch (error) {
     if (error instanceof GeminiError) {
