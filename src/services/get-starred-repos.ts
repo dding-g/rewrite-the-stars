@@ -3,6 +3,7 @@ import { octokit } from "../libs/oktokit";
 import { getNextPageByGitResetLinkHeader } from "../utils/get-next-page";
 
 type GetStarredRepositoriesItem = {
+  nodeId: string;
   name: string;
   htmlUrl: string;
   private: boolean;
@@ -14,6 +15,7 @@ type GetStarredRepositoriesItem = {
 
 const itemParser = (repo: any): GetStarredRepositoriesItem => {
   return {
+    nodeId: repo.node_id,
     name: repo.name,
     htmlUrl: repo.html_url,
     private: repo.private,
