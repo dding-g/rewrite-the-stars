@@ -1,12 +1,17 @@
 import { GeminiError } from "../errors/GeminiError";
 
-export const gemini = async (prompt: string) => {
+type GenerationConfig = {
+  responseMimeType: string;
+};
+export const gemini = async (
+  prompt: string,
+  generationConfig?: GenerationConfig
+) => {
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: {
-      responseMimeType: "application/json",
-    },
+    generationConfig: generationConfig ?? {},
   };
+  console.log(body);
 
   try {
     const response = await fetch(
@@ -36,7 +41,7 @@ export const gemini = async (prompt: string) => {
     }
 
     const textResponse = ret.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
-
+    console.log(textResponse);
     return textResponse;
   } catch (error) {
     if (error instanceof GeminiError) {
