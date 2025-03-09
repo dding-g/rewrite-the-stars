@@ -4,16 +4,29 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "bun index.ts",
-    "build": "tsc",
-    "test": "jest"
+    "data-build": "bun ./src/data-build/index.ts",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@octokit/rest": "^21.1.1",
-    "bun": "latest"
+    "bun": "latest",
+    "next": "15.2.1",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@tailwindcss/postcss": "^4",
+    "tailwindcss": "^4",
+    "eslint": "^9",
+    "eslint-config-next": "15.2.1",
+    "@eslint/eslintrc": "^3"
   },
   "peerDependencies": {
     "typescript": "^5"

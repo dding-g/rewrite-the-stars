@@ -1,5 +1,5 @@
 import { octokit } from "../../libs/oktokit";
-import { CreateGistError } from "./error";
+import { CreateGistError } from "./CreateGistError";
 
 export const createGist = async (content: any) => {
   try {

@@ -1,7 +1,7 @@
-import { createGist } from "./src/services/create-gist";
-import { getGistById } from "./src/services/get-gist";
-import { getStarredRepositories } from "./src/services/get-starred-repos";
-import { makeGitRepositoryTagsByGemini } from "./src/services/make-repository-tags";
+import { createGist } from "./services/create-gist";
+import { getGistById } from "./services/get-gist";
+import { getStarredRepositories } from "./services/get-starred-repos";
+import { makeGitRepositoryTagsByGemini } from "./services/make-repository-tags";
 
 try {
   console.log("====== Get My Star Repositories ======");
