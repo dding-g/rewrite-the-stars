@@ -1,7 +1,8 @@
-import { GeminiError } from "../errors/GeminiError";
+import { GeminiError } from "./GeminiError";
 
 type GenerationConfig = {
-  responseMimeType: string;
+  responseMimeType?: string;
+  responseSchema?: any;
 };
 export const gemini = async (
   prompt: string,

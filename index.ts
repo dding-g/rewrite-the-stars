@@ -1,37 +1,24 @@
-import { createGitRepositoryTagsByGemini } from "./src/services/create-repository-tags";
+import { createGist } from "./src/services/create-gist";
+import { getGistById } from "./src/services/get-gist";
 import { getStarredRepositories } from "./src/services/get-starred-repos";
-import fs from "fs";
+import { makeGitRepositoryTagsByGemini } from "./src/services/make-repository-tags";
 
-const repositories = await getStarredRepositories("dding-g");
-const repositoriesWithTags = await createGitRepositoryTagsByGemini(
-  repositories
-);
+try {
+  console.log("====== Get My Star Repositories ======");
+  const repositories = await getStarredRepositories("dding-g");
 
-fs.writeFileSync(
-  "./result.html",
-  `
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starred Repositories</title>
-    </head>
-    <body>
-    ${repositoriesWithTags
-      ?.map((v) => {
-        return `<div>
-      <h2>${v.name}</h2>
-      <p>${v.description}</p>
-      <p>${v.tags.map((tag: string) => `#${tag}`).join(" ")}</p>
-      <p>Updated at: ${v.updatedAt}</p>
-      <p>Stargazers count: ${v.stargazersCount}</p>
-      <a href="${v.htmlUrl}">Go to repository</a>
-      </div>`;
-      })
-      .join("")}
-    </body>
-    </html>
-    `
-);
+  console.log("====== Make Github Repository Tags JSON File ======");
+  const repositoriesWithTags = await makeGitRepositoryTagsByGemini(
+    repositories
+  );
+
+  console.log("====== Upload JSON File to gist ======");
+  const id = await createGist(repositoriesWithTags);
+
+  console.log("====== Check Upload ======");
+  const gists = await getGistById(id);
+  JSON.parse(gists.files?.["rewrites-the-stars.json"]?.content ?? "[]");
+} catch (err) {
+  console.error(err);
+  throw err;
+}

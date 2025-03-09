@@ -1,6 +1,6 @@
-import type { RestEndpointMethodTypes } from "@octokit/rest";
-import { octokit } from "../libs/oktokit";
-import { getNextPageByGitResetLinkHeader } from "../utils/get-next-page";
+import { octokit } from "../../libs/oktokit";
+import { getNextPageByGitResetLinkHeader } from "../../utils/get-next-page";
+import { GetStarredRepositoriesError } from "./GetStarredRepositoriesError";
 
 type GetStarredRepositoriesItem = {
   nodeId: string;
@@ -64,7 +64,7 @@ export const getStarredRepositories = async (username: string) => {
       page = nextPage ?? page + 1;
     }
     return data;
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    throw new GetStarredRepositoriesError(error.message);
   }
 };
