@@ -1,6 +1,6 @@
-import { gemini } from "../../libs/gemini";
+import { gemini } from "../../../shared/libs/gemini";
 import type { getStarredRepositories } from "../get-starred-repos/index.ts";
-import { MakeRepositoryTagsError } from "./MakeRepositoryTagsError.ts";
+import { MakeRepositoryTagsError } from "./MakeRepositoryTagsError";
 
 const prompt = (response: Array<any>) => `
 ## Description

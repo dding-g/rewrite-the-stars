@@ -1,5 +1,5 @@
-import { octokit } from "../../libs/oktokit";
-import { getNextPageByGitResetLinkHeader } from "../../utils/get-next-page";
+import { octokit } from "../../../shared/libs/oktokit";
+import { getNextPageByGitResetLinkHeader } from "../../../shared/utils/get-next-page";
 import { GetStarredRepositoriesError } from "./GetStarredRepositoriesError";
 
 type GetStarredRepositoriesItem = {

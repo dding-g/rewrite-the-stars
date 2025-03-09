@@ -1,4 +1,4 @@
-import { octokit } from "../../libs/oktokit";
+import { octokit } from "../../../shared/libs/oktokit";
 import { GetGistError } from "./GetGistError";
 
 export const getGistById = async (id: string) => {
