@@ -1,6 +1,6 @@
-import { octokit } from "../../../shared/libs/oktokit";
-import { getNextPageByGitResetLinkHeader } from "../../../shared/utils/get-next-page";
-import { GetStarredRepositoriesError } from "./GetStarredRepositoriesError";
+import { octokit } from "@/shared/libs/oktokit";
+import { getNextPageByGitResetLinkHeader } from "@/shared/utils/get-next-page";
+import { GetStarRepositoriesError } from "./get-star-repositories-error";
 
 type GetStarredRepositoriesItem = {
   nodeId: string;
@@ -65,6 +65,6 @@ export const getStarredRepositories = async (username: string) => {
     }
     return data;
   } catch (error: any) {
-    throw new GetStarredRepositoriesError(error.message);
+    throw new GetStarRepositoriesError(error.message);
   }
 };

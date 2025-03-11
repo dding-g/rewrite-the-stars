@@ -1,4 +1,4 @@
-export class GetStarredRepositoriesError extends Error {
+export class GetStarRepositoriesError extends Error {
   constructor(message: string) {
     super(message);
     this.name = "GetStarredRepositoriesError";

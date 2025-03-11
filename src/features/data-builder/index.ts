@@ -1,24 +1,34 @@
-import { createGist } from "./create-gist";
-import { getGistById } from "./get-gist";
-import { getStarredRepositories } from "./get-starred-repos";
+import { getRewritesStarGistByUser, updateGistById } from "./gist";
+import { GetRewritesStarGistByUserError } from "./gist/get-rewrites-star-gist/get-gists-by-user-error";
+import { createGist } from "./gist/post";
+import { getStarredRepositories } from "./github/get-star-repos";
 import { makeGitRepositoryTagsByGemini } from "./make-repository-tags";
 
-export const startDateBuild = async () => {
+export const startDateBuild = async ({
+  githubUserId,
+}: {
+  githubUserId: string;
+}) => {
   try {
-    console.log("====== Get My Star Repositories ======");
-    const repositories = await getStarredRepositories("dding-g");
+    console.log("1. Get My Star Repositories");
+    const repositories = await getStarredRepositories(githubUserId);
 
-    console.log("====== Make Github Repository Tags JSON File ======");
+    console.log("2. Make Github Repository Tags JSON File");
     const repositoriesWithTags = await makeGitRepositoryTagsByGemini(
       repositories
     );
 
-    console.log("====== Upload JSON File to gist ======");
-    const id = await createGist(repositoriesWithTags);
+    const existGistId = await getRewritesStarGistByUser(githubUserId);
 
-    console.log("====== Check Upload ======");
-    const gists = await getGistById(id);
-    JSON.parse(gists.files?.["rewrites-the-stars.json"]?.content ?? "[]");
+    if (existGistId) {
+      console.log("3. Update JSON File to gist");
+      await updateGistById(existGistId, repositoriesWithTags);
+      return existGistId;
+    }
+
+    console.log("3. Upload JSON File to gist");
+    const id = await createGist(repositoriesWithTags);
+    return id;
   } catch (err) {
     console.error(err);
     throw err;
