@@ -15,7 +15,7 @@ const itemParser = (repo: any): StarData => {
     description: repo.description,
     updatedAt: repo.updated_at,
     topics: repo.topic,
-    stargazersCount: repo.stargazersCount,
+    stargazersCount: repo.stargazers_count,
     pushedAt: repo.pushed_at,
     avatarUrl,
     tags: [],

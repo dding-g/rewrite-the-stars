@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -16,10 +17,16 @@ import React from "react";
 type Props = {} & StarData;
 export default function StarCard(props: Props) {
   return (
-    <Card>
+    <Card className="hover:shadow-lg hover:shadow-blue-600 transition-shadow">
       <CardHeader>
         <CardTitle className="flex items-center gap-3">
-          <span>{props.name}</span>
+          <div className="flex items-center gap-2">
+            <Avatar>
+              <AvatarImage src={props.avatarUrl} />
+              <AvatarFallback>{props.name}</AvatarFallback>
+            </Avatar>
+            <span>{props.name}</span>
+          </div>
           <div className="flex items-center gap-1">
             <span className="text-yellow-300">
               <Star width={16} />
