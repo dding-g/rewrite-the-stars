@@ -1,4 +1,4 @@
-import GistTable from "@/features/gist/Table";
+import { StarCardList } from "@/features/star/card-list";
 import { octokit } from "@/shared/libs/oktokit";
 
 export default async function GistPage({
@@ -15,7 +15,7 @@ export default async function GistPage({
 
   return (
     <div className="">
-      <GistTable data={result} />
+      <StarCardList data={result} />
     </div>
   );
 }

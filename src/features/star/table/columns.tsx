@@ -1,19 +1,10 @@
 "use client";
 
+import { StarData } from "@/types/data";
 import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
 
-export type GistStarData = {
-  nodeId: string;
-  name: string;
-  htmlUrl: string;
-  private: string;
-  description: string;
-  updatedAt: string;
-  tags: string[];
-};
-
-export const columns: ColumnDef<GistStarData>[] = [
+export const columns: ColumnDef<StarData>[] = [
   {
     accessorKey: "tags",
     header: "태그",
