@@ -18,17 +18,9 @@ export const makeGitRepositoryTagsByGemini = async (
   data: Awaited<ReturnType<typeof getStarredRepositories>>
 ) => {
   try {
-    const response = await gemini(
-      prompt(
-        data?.map((v) => ({
-          ...v,
-          tags: [],
-        })) ?? []
-      ),
-      {
-        responseMimeType: "application/json",
-      }
-    );
+    const response = await gemini(prompt(data), {
+      responseMimeType: "application/json",
+    });
     const obj = JSON.parse(response);
 
     return data?.map((item) => ({

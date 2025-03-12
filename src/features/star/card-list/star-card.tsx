@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -6,7 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { YYYYMMDD } from "@/shared/utils/date";
+import { starCountFormat } from "@/shared/utils/format";
 import { StarData } from "@/types/data";
+import { Star } from "lucide-react";
 import React from "react";
 
 type Props = {} & StarData;
@@ -14,22 +18,29 @@ export default function StarCard(props: Props) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{props.name}</CardTitle>
+        <CardTitle className="flex items-center gap-3">
+          <span>{props.name}</span>
+          <div className="flex items-center gap-1">
+            <span className="text-yellow-300">
+              <Star width={16} />
+            </span>
+            <span className="text-sm text-gray-600">
+              {starCountFormat(props.stargazersCount ?? 0)}
+            </span>
+          </div>
+        </CardTitle>
         <CardDescription>{props.description}</CardDescription>
       </CardHeader>
 
       <CardContent className="flex flex-wrap gap-2 flex-1">
         {props.tags.map((tag) => (
-          <span
-            key={tag}
-            className="inline-block px-2 py-1 text-xs font-semibold text-white bg-blue-500 rounded-full h-fit"
-          >
+          <Badge key={tag} color="blue">
             {tag}
-          </span>
+          </Badge>
         ))}
       </CardContent>
 
-      <CardFooter>
+      <CardFooter className="flex justify-between">
         <a
           href={props.htmlUrl}
           target="_blank"
@@ -38,6 +49,9 @@ export default function StarCard(props: Props) {
         >
           <GithubSvg />
         </a>
+        <div className="text-sm text-gray-500">
+          {`${YYYYMMDD(props.pushedAt)}`}
+        </div>
       </CardFooter>
     </Card>
   );

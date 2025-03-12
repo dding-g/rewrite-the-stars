@@ -1,19 +1,12 @@
 import { octokit } from "@/shared/libs/oktokit";
 import { getNextPageByGitResetLinkHeader } from "@/shared/utils/get-next-page";
 import { GetStarRepositoriesError } from "./get-star-repositories-error";
+import { StarData } from "@/types/data";
 
-type GetStarredRepositoriesItem = {
-  nodeId: string;
-  name: string;
-  htmlUrl: string;
-  private: boolean;
-  description: string;
-  topics: string[];
-  updatedAt: string;
-  stargazersCount: number;
-};
+const itemParser = (repo: any): StarData => {
+  const avatarUrl =
+    repo.organization?.avatar_url ?? repo.owner?.avatar_url ?? "";
 
-const itemParser = (repo: any): GetStarredRepositoriesItem => {
   return {
     nodeId: repo.node_id,
     name: repo.name,
@@ -23,6 +16,9 @@ const itemParser = (repo: any): GetStarredRepositoriesItem => {
     updatedAt: repo.updated_at,
     topics: repo.topic,
     stargazersCount: repo.stargazersCount,
+    pushedAt: repo.pushed_at,
+    avatarUrl,
+    tags: [],
   };
 };
 
@@ -36,7 +32,7 @@ export const getStarredRepositories = async (username: string) => {
     // pagination page number
     let page = 1;
     // data to store the fetched repositories
-    let data: GetStarredRepositoriesItem[] = [];
+    let data: StarData[] = [];
 
     while (true) {
       // get the starred repositories of the user
