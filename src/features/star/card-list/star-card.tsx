@@ -19,7 +19,7 @@ export default function StarCard(props: Props) {
   return (
     <Card className="hover:shadow-lg hover:shadow-blue-600 transition-shadow">
       <CardHeader>
-        <CardTitle className="flex items-center gap-3">
+        <CardTitle className="flex items-center flex-wrap  justify-between">
           <div className="flex items-center gap-2">
             <Avatar>
               <AvatarImage src={props.avatarUrl} />
