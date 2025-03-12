@@ -1,8 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import RewriteStarRequestGroup from "@/features/home/rewrite-star-request";
-import { Star } from "lucide-react";
-import Image from "next/image";
 
 export default function Home() {
   return (

@@ -1,5 +1,4 @@
 import { getRewritesStarGistByUser, updateGistById } from "./gist";
-import { GetRewritesStarGistByUserError } from "./gist/get-rewrites-star-gist/get-gists-by-user-error";
 import { createGist } from "./gist/post";
 import { getStarredRepositories } from "./github/get-star-repos";
 import { makeGitRepositoryTagsByGemini } from "./make-repository-tags";

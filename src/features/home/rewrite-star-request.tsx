@@ -5,16 +5,13 @@ import { Star } from "lucide-react";
 import React, { useState } from "react";
 import { toast } from "sonner";
 import RedirectButtons from "./redirect-buttons";
-import Image from "next/image";
 
 const RewriteStarRequestGroup = () => {
   const [githubName, setGithubName] = useState("");
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState("");
 
-  const request = async (e: any) => {
-    e.preventDefault();
-    setLoading(true);
+  const requestRewriteStar = async () => {
     try {
       const res = await fetch(`api/github/star-summary/${githubName}`, {
         method: "GET",
@@ -28,7 +25,26 @@ const RewriteStarRequestGroup = () => {
       console.error(e);
       toast.error("Failed to rewrite star. Please try again later.");
     }
+  };
 
+  const getExistingGist = async (e: any) => {
+    setLoading(true);
+    try {
+      e.preventDefault();
+      const res = await fetch(`api/gist/github-id/${githubName}`, {
+        method: "GET",
+      });
+      const { data } = await res.json();
+
+      if (data) {
+        setId(data);
+      } else {
+        requestRewriteStar();
+      }
+    } catch (e) {
+      console.error(e);
+      toast.error("Failed to get existing gist. Please try again later.");
+    }
     setLoading(false);
   };
 
@@ -38,7 +54,7 @@ const RewriteStarRequestGroup = () => {
 
   return (
     <div>
-      <form onSubmit={request}>
+      <form onSubmit={getExistingGist}>
         <div className="space-y-2">
           <Input
             className="bg-white"
