@@ -39,7 +39,7 @@ const RewriteStarRequestGroup = () => {
       if (data) {
         setId(data);
       } else {
-        requestRewriteStar();
+        await requestRewriteStar();
       }
     } catch (e) {
       console.error(e);
