@@ -22,6 +22,32 @@ const itemParser = (repo: any): StarData => {
   };
 };
 
+async function* fetchStarredReposPages(username: string) {
+  let page = 1;
+
+  while (true) {
+    const response = await octokit.rest.activity.listReposStarredByUser({
+      username,
+      page,
+    });
+
+    if (response.status !== 200) {
+      throw new Error(`Failed to fetch starred repositories for ${username}`);
+    }
+
+    yield response.data;
+
+    const linkHeader = response.headers.link ?? "";
+    const nextPage = getNextPageByGitResetLinkHeader(linkHeader);
+
+    if (!nextPage) {
+      break;
+    }
+
+    page = nextPage;
+  }
+}
+
 /**
  * @description Fetches the starred repositories of a user.
  * @param username The username of the user.
@@ -29,36 +55,13 @@ const itemParser = (repo: any): StarData => {
  */
 export const getStarredRepositories = async (username: string) => {
   try {
-    // pagination page number
-    let page = 1;
-    // data to store the fetched repositories
-    let data: StarData[] = [];
+    const data: StarData[] = [];
 
-    while (true) {
-      // get the starred repositories of the user
-      const response = await octokit.rest.activity.listReposStarredByUser({
-        username: username,
-        page,
-      });
-
-      if (response.status !== 200) {
-        throw new Error(`Failed to fetch starred repositories for ${username}`);
-      }
-
-      // parse the response and extract the required data
-      data = data.concat(response.data.map(itemParser));
-
-      const nextPage = getNextPageByGitResetLinkHeader(
-        response.headers.link ?? ""
-      );
-
-      // if there is no next page, break the loop
-      if (!nextPage) {
-        break;
-      }
-
-      page = nextPage ?? page + 1;
+    for await (const reposPage of fetchStarredReposPages(username)) {
+      const parsedItems = reposPage.map(itemParser);
+      data.push(...parsedItems);
     }
+
     return data;
   } catch (error: any) {
     throw new GetStarRepositoriesError(error.message);

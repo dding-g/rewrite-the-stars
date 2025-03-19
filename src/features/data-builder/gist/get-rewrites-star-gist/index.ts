@@ -8,51 +8,51 @@ const findRewritesStarGist = (gist: any) => {
   if (!!result) {
     return result.id;
   }
-
   return null;
 };
 
-export const getRewritesStarGistByUser = async (username: string) => {
-  try {
-    let page = 1;
-    let gistId = undefined;
+async function* fetchUserGistsPages(username: string) {
+  let page = 1;
 
-    while (true) {
-      // get the starred repositories of the user
-      const response = await octokit.request("GET /users/{username}/gists", {
-        username,
-        page,
-        headers: {
-          "X-GitHub-Api-Version": "2022-11-28",
-        },
-      });
+  while (true) {
+    const response = await octokit.request("GET /users/{username}/gists", {
+      username,
+      page,
+      headers: {
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    });
 
-      if (response.status !== 200) {
-        throw new Error(
-          `Failed to fetch gist for ${username} user, ${page} page`
-        );
-      }
-
-      const id = findRewritesStarGist(response.data);
-
-      if (id) {
-        gistId = id;
-        break;
-      }
-
-      const nextPage = getNextPageByGitResetLinkHeader(
-        response.headers.link ?? ""
+    if (response.status !== 200) {
+      throw new Error(
+        `Failed to fetch gist for ${username} user, ${page} page`
       );
-
-      // if there is no next page, break the loop
-      if (!nextPage) {
-        break;
-      }
-
-      page = nextPage ?? page + 1;
     }
 
-    return gistId;
+    yield response.data;
+
+    const linkHeader = response.headers.link ?? "";
+    const nextPage = getNextPageByGitResetLinkHeader(linkHeader);
+
+    if (!nextPage) {
+      break;
+    }
+
+    page = nextPage;
+  }
+}
+
+export const getRewritesStarGistByUser = async (username: string) => {
+  try {
+    for await (const gistData of fetchUserGistsPages(username)) {
+      const id = findRewritesStarGist(gistData);
+
+      if (id) {
+        return id;
+      }
+    }
+
+    return undefined;
   } catch (err: any) {
     console.error(err);
     throw new GetRewritesStarGistByUserError(err.message);
