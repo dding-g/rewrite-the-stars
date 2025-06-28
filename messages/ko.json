@@ -1,0 +1,58 @@
+{
+	"metadata": {
+		"title": "Rewrite Stars",
+		"description": "GitHub 즐겨찾기 저장소를 아름답고 체계적인 대시보드로 변환하세요"
+	},
+	"auth": {
+		"loginWithGitHub": "GitHub로 로그인",
+		"description": "GitHub 즐겨찾기 저장소를 아름답고 체계적인 대시보드로 변환하세요. 별표를 동기화하고, 커스텀 태그를 추가하며, 선별된 컬렉션을 공유하세요.",
+		"welcome": "Rewrite Stars에 오신 것을 환영합니다",
+		"loginDescription": "GitHub 계정으로 로그인하여 시작하세요",
+		"termsText": "로그인하면 저희의 서비스 약관과 개인정보 처리방침에 동의하는 것으로 간주됩니다."
+	},
+	"home": {
+		"title": "Rewrite Stars",
+		"features": {
+			"tagManagement": {
+				"title": "🏷️ 태그 관리",
+				"description": "저장소에 커스텀 태그를 추가하여 효율적으로 분류하세요"
+			},
+			"searchFilter": {
+				"title": "🔍 검색 & 필터",
+				"description": "태그와 키워드로 원하는 저장소를 빠르게 찾아보세요"
+			},
+			"dashboardSharing": {
+				"title": "🔗 대시보드 공유",
+				"description": "정리된 저장소 컬렉션을 다른 사람들과 공유하세요"
+			}
+		}
+	},
+	"dashboard": {
+		"title": "대시보드",
+		"syncRepositories": "저장소 동기화",
+		"searchPlaceholder": "저장소 검색...",
+		"filterByTag": "태그로 필터링",
+		"lastUpdated": "마지막 업데이트",
+		"noRepositories": "GitHub에서 저장소를 동기화하여 시작하세요",
+		"visitRepository": "방문",
+		"allRepositories": "모든 저장소",
+		"viewOnGitHub": "GitHub에서 보기",
+		"poweredBy": "Powered by",
+		"userCollection": "{{username}}의 저장소 컬렉션",
+		"collectionDescription": "정리된 GitHub 즐겨찾기 저장소들",
+		"avatarAlt": "{{username}}의 아바타",
+		"updateDate": "업데이트: {{date}}"
+	},
+	"tags": {
+		"frontend": "프론트엔드",
+		"backend": "백엔드",
+		"tools": "도구",
+		"react": "React",
+		"typescript": "TypeScript"
+	},
+	"examples": {
+		"repositoryName": "저장소 이름",
+		"repositoryDescription": "저장소 설명이 여기에 표시됩니다...",
+		"sampleDescription": "이것은 저장소 설명 예시입니다. 실제 데이터는 GitHub API에서 가져옵니다."
+	}
+}

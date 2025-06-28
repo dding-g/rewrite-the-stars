@@ -1,0 +1,58 @@
+{
+	"metadata": {
+		"title": "Rewrite Stars",
+		"description": "Transform your GitHub starred repositories into a beautiful, organized dashboard"
+	},
+	"auth": {
+		"loginWithGitHub": "Login with GitHub",
+		"description": "Transform your GitHub starred repositories into a beautiful, organized dashboard. Sync your stars, add custom tags, and share your curated collections.",
+		"welcome": "Welcome to Rewrite Stars",
+		"loginDescription": "Login with your GitHub account to get started",
+		"termsText": "By logging in, you agree to our Terms of Service and Privacy Policy."
+	},
+	"home": {
+		"title": "Rewrite Stars",
+		"features": {
+			"tagManagement": {
+				"title": "🏷️ Tag Management",
+				"description": "Add custom tags to repositories for efficient organization"
+			},
+			"searchFilter": {
+				"title": "🔍 Search & Filter",
+				"description": "Quickly find repositories using tags and keywords"
+			},
+			"dashboardSharing": {
+				"title": "🔗 Dashboard Sharing",
+				"description": "Share your curated repository collections with others"
+			}
+		}
+	},
+	"dashboard": {
+		"title": "Dashboard",
+		"syncRepositories": "Sync Repositories",
+		"searchPlaceholder": "Search repositories...",
+		"filterByTag": "Filter by tag",
+		"lastUpdated": "Last updated",
+		"noRepositories": "Sync repositories from GitHub to get started",
+		"visitRepository": "Visit",
+		"allRepositories": "All Repositories",
+		"viewOnGitHub": "View on GitHub",
+		"poweredBy": "Powered by",
+		"userCollection": "{{username}}'s repository collection",
+		"collectionDescription": "Curated GitHub starred repositories",
+		"avatarAlt": "{{username}}'s avatar",
+		"updateDate": "Updated: {{date}}"
+	},
+	"tags": {
+		"frontend": "Frontend",
+		"backend": "Backend",
+		"tools": "Tools",
+		"react": "React",
+		"typescript": "TypeScript"
+	},
+	"examples": {
+		"repositoryName": "Repository Name",
+		"repositoryDescription": "Repository description goes here...",
+		"sampleDescription": "This is a sample repository description. Real data will be fetched from GitHub API."
+	}
+}

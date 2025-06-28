@@ -1,0 +1,75 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"vcs": {
+		"enabled": false,
+		"clientKind": "git",
+		"useIgnoreFile": false
+	},
+	"files": {
+		"ignoreUnknown": false,
+		"ignore": ["node_modules", "dist", "build", ".next", "coverage"]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"lineWidth": 100,
+		"indentWidth": 2
+	},
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"complexity": {
+				"recommended": true,
+				"noUselessFragments": "error",
+				"noForEach": "error",
+				"noBannedTypes": "error",
+				"noStaticOnlyClass": "error",
+				"noUselessEmptyExport": "error",
+				"useSimplifiedLogicExpression": "error"
+			},
+			"correctness": {
+				"recommended": true,
+				"noUnusedVariables": "error",
+				"noUndeclaredVariables": "error",
+				"noUnreachable": "error"
+			},
+			"suspicious": {
+				"recommended": true,
+				"noConsoleLog": "warn",
+				"noDebugger": "error",
+				"noEmptyInterface": "error",
+				"noExplicitAny": "warn"
+			},
+			"style": {
+				"recommended": true,
+				"noNegationElse": "error",
+				"useBlockStatements": "error",
+				"useTemplate": "error",
+				"noUselessElse": "error"
+			},
+			"security": {
+				"recommended": true
+			},
+			"a11y": {
+				"recommended": true,
+				"useAltText": "error",
+				"useKeyWithClickEvents": "error"
+			},
+			"performance": {
+				"recommended": true,
+				"noDelete": "error"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single",
+			"trailingComma": "es5",
+			"semicolons": "always"
+		}
+	}
+}
