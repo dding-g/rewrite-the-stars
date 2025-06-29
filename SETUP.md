@@ -19,8 +19,8 @@
 
 3. **Supabase 설정값 복사**
    - Project Settings → API에서 다음 값들을 복사:
-     - `URL`: `NEXT_PUBLIC_SUPABASE_URL`에 사용
-     - `anon public`: `NEXT_PUBLIC_SUPABASE_ANON_KEY`에 사용
+     - `URL`: `SUPABASE_URL`에 사용
+     - `anon public`: `SUPABASE_ANON_KEY`에 사용
      - `service_role`: `SUPABASE_SERVICE_ROLE_KEY`에 사용
 
 ### ✅ 2. GitHub OAuth 앱 설정
@@ -52,8 +52,8 @@ GITHUB_CLIENT_SECRET=your_github_client_secret_here
 GITHUB_CALLBACK_URL=http://localhost:3000/api/auth/github/callback
 
 # Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_ANON_KEY=your_supabase_anon_key_here
 SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
 
 # NextAuth Configuration

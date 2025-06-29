@@ -2,8 +2,8 @@ import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '@/shared/types/database';
 
 // Supabase 클라이언트 인스턴스를 생성하는 함수
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Supabase 환경 변수가 설정되지 않았습니다.');
