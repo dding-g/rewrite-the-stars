@@ -24,7 +24,7 @@ export default function LoginPage() {
 	};
 
 	return (
-		<div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center overflow-hidden">
+		<div className="relative min-h-screen bg-white flex items-center justify-center overflow-hidden">
 			<Meteors number={30} />
 			
 			<motion.div 
@@ -39,7 +39,7 @@ export default function LoginPage() {
 					borderRadius={16}
 					duration={8}
 				>
-					<div className="bg-slate-900/90 backdrop-blur-xl p-8 rounded-2xl">
+					<div className="bg-white/90 backdrop-blur-xl p-8 rounded-2xl border border-gray-200">
 						<div className="text-center mb-8">
 							<motion.h1 
 								className="text-4xl font-bold mb-4"
@@ -48,14 +48,14 @@ export default function LoginPage() {
 								transition={{ duration: 0.6, delay: 0.2 }}
 							>
 								<GradientText 
-									gradient="from-blue-400 via-purple-500 to-pink-500"
-									className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500"
+									gradient="from-blue-600 via-purple-600 to-pink-600"
+									className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"
 								>
 									{t('welcome')}
 								</GradientText>
 							</motion.h1>
 							<motion.p 
-								className="text-gray-300 leading-relaxed"
+								className="text-gray-600 leading-relaxed"
 								initial={{ opacity: 0, y: 10 }}
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ duration: 0.6, delay: 0.4 }}
@@ -91,13 +91,13 @@ export default function LoginPage() {
 									}
 									changeText={
 										<span className="flex items-center gap-2">
-											<div className="w-4 h-4 border-2 border-gray-600 border-t-transparent rounded-full animate-spin" />
+											<div className="w-4 h-4 border-2 border-gray-300 border-t-transparent rounded-full animate-spin" />
 											Loading...
 										</span>
 									}
 									onClick={handleGitHubLogin}
 									disabled={isLoading}
-									className="w-full bg-slate-800 text-white hover:bg-slate-700 border border-slate-700 transition-colors duration-200"
+									className="w-full bg-gray-900 text-white hover:bg-gray-800 border border-gray-300 transition-colors duration-200"
 								/>
 							</div>
 
@@ -107,15 +107,15 @@ export default function LoginPage() {
 								animate={{ opacity: 1 }}
 								transition={{ duration: 0.6, delay: 0.8 }}
 							>
-								<p className="text-xs text-gray-400 leading-relaxed">
+								<p className="text-xs text-gray-500 leading-relaxed">
 									{t('termsText')}
 								</p>
 							</motion.div>
 						</motion.div>
 
 						{/* 장식용 요소들 */}
-						<div className="absolute -top-4 -left-4 w-24 h-24 bg-blue-500/20 rounded-full blur-xl" />
-						<div className="absolute -bottom-4 -right-4 w-32 h-32 bg-purple-500/20 rounded-full blur-xl" />
+						<div className="absolute -top-4 -left-4 w-24 h-24 bg-blue-500/10 rounded-full blur-xl" />
+						<div className="absolute -bottom-4 -right-4 w-32 h-32 bg-purple-500/10 rounded-full blur-xl" />
 					</div>
 				</ShineBorder>
 			</motion.div>

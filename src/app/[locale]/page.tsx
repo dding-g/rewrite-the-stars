@@ -27,8 +27,8 @@ export default function HomePage() {
 	];
 
 	return (
-		<div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
-			<Particles className="absolute inset-0" quantity={50} />
+		<div className="relative min-h-screen bg-white overflow-hidden">
+			<Particles className="absolute inset-0" quantity={50} color="#000000" />
 			
 			<div className="relative z-10 container mx-auto px-4 py-16">
 				<div className="text-center">
@@ -40,8 +40,8 @@ export default function HomePage() {
 					>
 						<h1 className="text-6xl md:text-8xl font-bold mb-6">
 							<GradientText 
-								gradient="from-blue-400 via-purple-500 to-pink-500"
-								className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500"
+								gradient="from-blue-600 via-purple-600 to-pink-600"
+								className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"
 							>
 								{t('title')}
 							</GradientText>
@@ -49,7 +49,7 @@ export default function HomePage() {
 					</motion.div>
 
 					<motion.p 
-						className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed"
+						className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8, delay: 0.2 }}
@@ -90,7 +90,7 @@ export default function HomePage() {
 						animate={{ opacity: 1 }}
 						transition={{ duration: 0.8, delay: 0.6 }}
 					>
-						<p className="text-gray-400 mb-4 text-sm uppercase tracking-wider">Built with</p>
+						<p className="text-gray-500 mb-4 text-sm uppercase tracking-wider">Built with</p>
 						<Marquee pauseOnHover className="[--duration:30s]">
 							{techStack.map((tech, index) => (
 								<div
@@ -110,32 +110,32 @@ export default function HomePage() {
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8, delay: 0.8 }}
 					>
-						<MagicCard className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
+						<MagicCard className="bg-gray-50 border-gray-200 backdrop-blur-sm">
 							<div className="text-4xl mb-4">🏷️</div>
-							<h3 className="text-xl font-semibold text-white mb-3">
+							<h3 className="text-xl font-semibold text-gray-900 mb-3">
 								{t('features.tagManagement.title')}
 							</h3>
-							<p className="text-gray-300 leading-relaxed">
+							<p className="text-gray-600 leading-relaxed">
 								{t('features.tagManagement.description')}
 							</p>
 						</MagicCard>
 
-						<MagicCard className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
+						<MagicCard className="bg-gray-50 border-gray-200 backdrop-blur-sm">
 							<div className="text-4xl mb-4">🔍</div>
-							<h3 className="text-xl font-semibold text-white mb-3">
+							<h3 className="text-xl font-semibold text-gray-900 mb-3">
 								{t('features.searchFilter.title')}
 							</h3>
-							<p className="text-gray-300 leading-relaxed">
+							<p className="text-gray-600 leading-relaxed">
 								{t('features.searchFilter.description')}
 							</p>
 						</MagicCard>
 
-						<MagicCard className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
+						<MagicCard className="bg-gray-50 border-gray-200 backdrop-blur-sm">
 							<div className="text-4xl mb-4">🔗</div>
-							<h3 className="text-xl font-semibold text-white mb-3">
+							<h3 className="text-xl font-semibold text-gray-900 mb-3">
 								{t('features.dashboardSharing.title')}
 							</h3>
-							<p className="text-gray-300 leading-relaxed">
+							<p className="text-gray-600 leading-relaxed">
 								{t('features.dashboardSharing.description')}
 							</p>
 						</MagicCard>

@@ -107,12 +107,12 @@ export default function PublicDashboardPage() {
 	// 에러 상태 렌더링
 	if (error) {
 		return (
-			<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-				<MagicCard className="bg-slate-800/50 border-slate-700 backdrop-blur-sm text-center p-16">
+			<div className="min-h-screen bg-white flex items-center justify-center">
+				<MagicCard className="bg-gray-50 border-gray-200 backdrop-blur-sm text-center p-16">
 					<div className="space-y-4">
 						<div className="text-6xl">😵</div>
-						<h2 className="text-2xl font-bold text-white">사용자를 찾을 수 없습니다</h2>
-						<p className="text-gray-400">요청하신 사용자의 대시보드가 존재하지 않습니다.</p>
+						<h2 className="text-2xl font-bold text-gray-900">사용자를 찾을 수 없습니다</h2>
+						<p className="text-gray-600">요청하신 사용자의 대시보드가 존재하지 않습니다.</p>
 					</div>
 				</MagicCard>
 			</div>
@@ -120,7 +120,7 @@ export default function PublicDashboardPage() {
 	}
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+		<div className="min-h-screen bg-white">
 			<div className="container mx-auto px-4 py-8">
 				{/* 헤더 섹션 */}
 				<motion.div 
@@ -134,24 +134,24 @@ export default function PublicDashboardPage() {
 							<img
 								src={user.avatar_url}
 								alt={`${user.username}'s avatar`}
-								className="w-16 h-16 rounded-full border-2 border-slate-700"
+								className="w-16 h-16 rounded-full border-2 border-gray-300"
 							/>
 						)}
 						<div>
 							<h1 className="text-4xl font-bold mb-2">
 								<GradientText 
-									gradient="from-blue-400 via-purple-500 to-pink-500"
-									className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500"
+									gradient="from-blue-600 via-purple-600 to-pink-600"
+									className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"
 								>
 									{user?.username}'s Dashboard
 								</GradientText>
 							</h1>
-							<div className="flex items-center gap-2 text-gray-300">
+							<div className="flex items-center gap-2 text-gray-600">
 								<span className="text-lg">⭐</span>
 								<NumberTicker value={pagination.total} className="text-xl font-semibold" />
 								<span>starred repositories</span>
 								{isOwner && (
-									<span className="ml-2 px-2 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full border border-blue-500/30">
+									<span className="ml-2 px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full border border-green-200">
 										Owner
 									</span>
 								)}
@@ -163,7 +163,7 @@ export default function PublicDashboardPage() {
 					{isOwner && (
 						<PulsatingButton 
 							onClick={handleSync}
-							className="bg-blue-600 hover:bg-blue-700"
+							className="bg-blue-600 hover:bg-blue-700 text-white"
 							pulseColor="#3b82f6"
 							disabled={isSyncing}
 						>
@@ -193,9 +193,9 @@ export default function PublicDashboardPage() {
 								placeholder={t('searchPlaceholder')}
 								value={searchTerm}
 								onChange={(e) => setSearchTerm(e.target.value)}
-								className="w-full px-4 py-3 pl-10 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm transition-all duration-200"
+								className="w-full px-4 py-3 pl-10 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
 							/>
-							<svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
 							</svg>
 						</div>
@@ -203,7 +203,7 @@ export default function PublicDashboardPage() {
 						<select 
 							value={selectedTag}
 							onChange={(e) => setSelectedTag(e.target.value)}
-							className="px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm min-w-[160px]"
+							className="px-4 py-3 rounded-xl bg-gray-50 border border-gray-300 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent min-w-[160px]"
 						>
 							<option value="">{t('filterByTag')}</option>
 							{tags.map((tag) => (
@@ -223,7 +223,7 @@ export default function PublicDashboardPage() {
 				>
 					{isLoading ? (
 						<div className="flex justify-center items-center py-16">
-							<div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+							<div className="w-8 h-8 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
 						</div>
 					) : repositories.length > 0 ? (
 						<>
@@ -231,21 +231,21 @@ export default function PublicDashboardPage() {
 								{repositories.map((repo, index) => (
 								<BentoGridItem
 									key={repo.id}
-									className={`bg-slate-800/50 border-slate-700 backdrop-blur-sm ${
+									className={`bg-gray-50 border-gray-200 hover:shadow-lg transition-shadow ${
 										index === 0 ? 'md:col-span-2' : ''
 									}`}
 									onClick={() => window.open(repo.html_url, '_blank')}
 									title={
 										<div className="flex items-center justify-between">
 											<div className="flex items-center gap-2">
-												<span className="text-white font-semibold">{repo.name}</span>
+												<span className="text-gray-900 font-semibold">{repo.name}</span>
 												{repo.private && (
-													<svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+													<svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
 														<path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
 													</svg>
 												)}
 											</div>
-											<div className="flex items-center gap-1 text-yellow-400">
+											<div className="flex items-center gap-1 text-yellow-600">
 												<svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
 													<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
 												</svg>
@@ -255,12 +255,12 @@ export default function PublicDashboardPage() {
 									}
 									description={
 										<div className="space-y-3">
-											<p className="text-gray-300 text-sm leading-relaxed">{repo.description || 'No description available'}</p>
+											<p className="text-gray-600 text-sm leading-relaxed">{repo.description || 'No description available'}</p>
 											<div className="flex flex-wrap gap-2">
 												{repo.tags.map((tag) => (
 													<span
 														key={tag.id}
-														className="px-2 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full border border-blue-500/30"
+														className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full border border-blue-200"
 													>
 														{tag.name}
 													</span>
@@ -268,14 +268,14 @@ export default function PublicDashboardPage() {
 												{repo.topics.map((topic) => (
 													<span
 														key={topic}
-														className="px-2 py-1 bg-purple-500/20 text-purple-300 text-xs rounded-full border border-purple-500/30"
+														className="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded-full border border-purple-200"
 													>
 														{topic}
 													</span>
 												))}
 											</div>
 											<div className="flex justify-between items-center pt-2">
-												<span className="text-xs text-gray-400">
+												<span className="text-xs text-gray-500">
 													{t('lastUpdated')}: {formatDate(repo.updated_at_github)}
 												</span>
 												<div className="flex items-center gap-2">
@@ -286,14 +286,14 @@ export default function PublicDashboardPage() {
 															className="w-6 h-6 rounded-full"
 														/>
 													)}
-													<span className="text-xs text-gray-400">{repo.owner}</span>
+													<span className="text-xs text-gray-500">{repo.owner}</span>
 												</div>
 											</div>
 										</div>
 									}
 									header={
-										<div className="w-full h-20 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg flex items-center justify-center">
-											<svg className="w-8 h-8 text-white/50" fill="currentColor" viewBox="0 0 20 20">
+										<div className="w-full h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg flex items-center justify-center">
+											<svg className="w-8 h-8 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
 												<path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
 											</svg>
 										</div>
@@ -308,7 +308,7 @@ export default function PublicDashboardPage() {
 								<button
 									onClick={() => handlePageChange(pagination.page - 1)}
 									disabled={!pagination.hasPreviousPage}
-									className="px-4 py-2 bg-slate-800/50 border border-slate-700 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700/50 transition-colors"
+									className="px-4 py-2 bg-gray-100 border border-gray-300 text-gray-900 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-200 transition-colors"
 								>
 									Previous
 								</button>
@@ -325,7 +325,7 @@ export default function PublicDashboardPage() {
 												className={`px-3 py-2 rounded-lg transition-colors ${
 													pageNum === pagination.page
 														? 'bg-blue-600 text-white'
-														: 'bg-slate-800/50 border border-slate-700 text-white hover:bg-slate-700/50'
+														: 'bg-gray-100 border border-gray-300 text-gray-900 hover:bg-gray-200'
 												}`}
 											>
 												{pageNum}
@@ -337,7 +337,7 @@ export default function PublicDashboardPage() {
 								<button
 									onClick={() => handlePageChange(pagination.page + 1)}
 									disabled={!pagination.hasNextPage}
-									className="px-4 py-2 bg-slate-800/50 border border-slate-700 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700/50 transition-colors"
+									className="px-4 py-2 bg-gray-100 border border-gray-300 text-gray-900 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-200 transition-colors"
 								>
 									Next
 								</button>
@@ -345,11 +345,11 @@ export default function PublicDashboardPage() {
 						)}
 					</>
 					) : (
-						<MagicCard className="bg-slate-800/50 border-slate-700 backdrop-blur-sm text-center py-16">
+						<MagicCard className="bg-gray-50 border-gray-200 hover:shadow-lg transition-shadow text-center py-16">
 							<div className="space-y-4">
 								<div className="text-6xl">📦</div>
-								<h3 className="text-xl font-semibold text-white">No repositories found</h3>
-								<p className="text-gray-400 max-w-md mx-auto">
+								<h3 className="text-xl font-semibold text-gray-900">No repositories found</h3>
+								<p className="text-gray-500 max-w-md mx-auto">
 									This user hasn't shared any starred repositories yet, or they don't match your current filters.
 								</p>
 							</div>
