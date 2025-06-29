@@ -1,22 +1,20 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
+import type React from 'react';
 
 export const metadata: Metadata = {
-  title: 'Rewrite Stars',
-  description: 'Transform your GitHub starred repositories into a beautiful, organized dashboard',
+	title: 'Rewrite Stars',
+	description: 'Transform your GitHub starred repositories into a beautiful, organized dashboard',
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) {
-  return (
-    <html lang='en'>
-      <body className={inter.className}>{children}</body>
-    </html>
-  );
+	return (
+		<html lang="en">
+			<body>{children}</body>
+		</html>
+	);
 }

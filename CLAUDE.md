@@ -17,23 +17,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
-Since this is a Next.js project that will use Bun as the package manager, common commands will likely be:
+Since this is a Next.js project that uses pnpm as the package manager, common commands are:
 
 ```bash
 # Install dependencies
-bun install
+pnpm install
 
 # Development server
-bun dev
+pnpm dev
 
 # Build for production
-bun build
+pnpm build
 
 # Linting (Biome)
-bun lint
+pnpm lint
 
 # Type checking
-bun typecheck
+pnpm type-check
 ```
 
 ## Architecture
