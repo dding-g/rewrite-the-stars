@@ -6,7 +6,9 @@
       "Bash(mkdir:*)",
       "Bash(rm:*)",
       "Bash(mv:*)",
-      "Bash(bun:*)"
+      "Bash(bun:*)",
+      "WebFetch(domain:magicui.design)",
+      "Bash(pnpm add:*)"
     ],
     "deny": []
   }

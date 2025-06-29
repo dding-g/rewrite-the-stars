@@ -24,3 +24,82 @@ body {
 	color: var(--foreground);
 	font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Magic UI Animations */
+@keyframes shimmer {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: -200% 0;
+	}
+}
+
+@keyframes marquee {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(calc(-100% - var(--gap)));
+	}
+}
+
+@keyframes marquee-vertical {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(calc(-100% - var(--gap)));
+	}
+}
+
+@keyframes meteor-effect {
+	0% {
+		transform: rotate(215deg) translateX(0);
+		opacity: 1;
+	}
+	70% {
+		opacity: 1;
+	}
+	100% {
+		transform: rotate(215deg) translateX(-500px);
+		opacity: 0;
+	}
+}
+
+.animate-shimmer {
+	animation: shimmer 2s infinite;
+}
+
+.animate-marquee {
+	animation: marquee var(--duration) linear infinite;
+}
+
+.animate-marquee-vertical {
+	animation: marquee-vertical var(--duration) linear infinite;
+}
+
+.animate-meteor-effect {
+	animation: meteor-effect var(--duration) linear infinite;
+}
+
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+	.animate-shimmer,
+	.animate-marquee,
+	.animate-marquee-vertical,
+	.animate-meteor-effect,
+	* {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+/* Enhanced responsive design */
+@media (max-width: 640px) {
+	.container {
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+}
