@@ -8,6 +8,11 @@ export async function GET(request: NextRequest) {
   try {
     const clientId = process.env.GITHUB_CLIENT_ID;
     
+    console.log('GitHub OAuth start - Environment check:', {
+      GITHUB_CLIENT_ID: clientId ? 'set' : 'not set',
+      NEXTAUTH_URL: process.env.NEXTAUTH_URL
+    });
+    
     if (!clientId) {
       return NextResponse.json(
         { error: 'GitHub Client ID가 설정되지 않았습니다.' },
@@ -16,10 +21,14 @@ export async function GET(request: NextRequest) {
     }
 
     // GitHub OAuth 인증 URL 생성
+    const redirectUri = `${process.env.NEXTAUTH_URL}/api/auth/github/callback`;
     const githubAuthUrl = new URL('https://github.com/login/oauth/authorize');
     githubAuthUrl.searchParams.set('client_id', clientId);
     githubAuthUrl.searchParams.set('scope', 'user:email read:user');
-    githubAuthUrl.searchParams.set('redirect_uri', `${process.env.NEXTAUTH_URL}/api/auth/github/callback`);
+    githubAuthUrl.searchParams.set('redirect_uri', redirectUri);
+
+    console.log('GitHub OAuth start - Redirecting to:', githubAuthUrl.toString());
+    console.log('GitHub OAuth start - Redirect URI:', redirectUri);
 
     // GitHub 로그인 페이지로 리다이렉트
     return NextResponse.redirect(githubAuthUrl.toString());

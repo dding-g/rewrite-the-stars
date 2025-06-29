@@ -8,7 +8,9 @@
       "Bash(mv:*)",
       "Bash(bun:*)",
       "WebFetch(domain:magicui.design)",
-      "Bash(pnpm add:*)"
+      "Bash(pnpm add:*)",
+      "Bash(pnpm typecheck:*)",
+      "Bash(pnpm type-check:*)"
     ],
     "deny": []
   }

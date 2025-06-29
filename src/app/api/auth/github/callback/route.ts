@@ -8,6 +8,13 @@ import { type NextRequest, NextResponse } from 'next/server';
  */
 export async function GET(request: NextRequest) {
 	try {
+		console.log('GitHub callback - Environment check:', {
+			NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+			NODE_ENV: process.env.NODE_ENV,
+			GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID ? 'set' : 'not set',
+			GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET ? 'set' : 'not set'
+		});
+
 		const { searchParams } = new URL(request.url);
 		const code = searchParams.get('code');
 		const error = searchParams.get('error');
@@ -79,13 +86,16 @@ export async function GET(request: NextRequest) {
 
 		// HTTP-only 쿠키에 사용자 ID 저장
 		const cookieStore = await cookies();
-		cookieStore.set('user_id', user.id.toString(), {
+		console.log('GitHub callback - Setting cookie for user:', user.id, user.username);
+		cookieStore.set('user_id', user.id, {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
 			sameSite: 'lax',
 			maxAge: 60 * 60 * 24 * 30, // 30일
+			path: '/', // 명시적으로 path 설정
 		});
 
+		console.log('GitHub callback - Cookie set, redirecting to dashboard');
 		// 대시보드로 리다이렉트
 		return NextResponse.redirect(`${process.env.NEXTAUTH_URL}/dashboard`);
 	} catch (error) {

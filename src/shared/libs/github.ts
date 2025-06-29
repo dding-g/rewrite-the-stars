@@ -58,10 +58,10 @@ export class GitHubClient {
           avatar_url: repo.owner.avatar_url,
         },
         html_url: repo.html_url,
-        description: repo.description,
+        description: repo.description || '',
         private: repo.private,
         stargazers_count: repo.stargazers_count,
-        updated_at: repo.updated_at,
+        updated_at: repo.updated_at || new Date().toISOString(),
         topics: repo.topics || [],
       }));
     } catch (error) {

@@ -7,13 +7,17 @@ export const metadata: Metadata = {
 	description: 'Transform your GitHub starred repositories into a beautiful, organized dashboard',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
+	params,
 }: {
 	children: React.ReactNode;
+	params: Promise<{ locale: string }>;
 }) {
+	const { locale } = await params;
+
 	return (
-		<html lang="en">
+		<html lang={locale}>
 			<body>{children}</body>
 		</html>
 	);

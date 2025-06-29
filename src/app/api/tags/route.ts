@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
+import { withAuth, type User } from '@/shared/libs/auth';
 import { createClient } from '@/shared/libs/supabase';
 
 /**
@@ -9,24 +9,14 @@ import { createClient } from '@/shared/libs/supabase';
  */
 
 // 사용자의 태그 목록 조회
-export async function GET(request: NextRequest) {
+async function getTags(user: User, request: NextRequest) {
   try {
-    const cookieStore = await cookies();
-    const userId = cookieStore.get('user_id')?.value;
-
-    if (!userId) {
-      return NextResponse.json(
-        { error: '인증이 필요합니다.' },
-        { status: 401 }
-      );
-    }
-
     const supabase = createClient();
 
     const { data: tags, error } = await supabase
       .from('tags')
       .select('*')
-      .eq('user_id', userId)
+      .eq('created_by', user.id)
       .order('name');
 
     if (error) {
@@ -48,18 +38,8 @@ export async function GET(request: NextRequest) {
 }
 
 // 새 태그 생성
-export async function POST(request: NextRequest) {
+async function createTag(user: User, request: NextRequest) {
   try {
-    const cookieStore = await cookies();
-    const userId = cookieStore.get('user_id')?.value;
-
-    if (!userId) {
-      return NextResponse.json(
-        { error: '인증이 필요합니다.' },
-        { status: 401 }
-      );
-    }
-
     const body = await request.json();
     const { name, color, description } = body;
 
@@ -76,7 +56,7 @@ export async function POST(request: NextRequest) {
     const { data: existingTag } = await supabase
       .from('tags')
       .select('id')
-      .eq('user_id', userId)
+      .eq('created_by', user.id)
       .eq('name', name.trim())
       .single();
 
@@ -91,7 +71,7 @@ export async function POST(request: NextRequest) {
     const { data: tag, error } = await supabase
       .from('tags')
       .insert({
-        user_id: parseInt(userId),
+        created_by: user.id,
         name: name.trim(),
         color: color || '#3B82F6',
         description: description?.trim() || null,
@@ -116,3 +96,6 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+export const GET = withAuth(getTags);
+export const POST = withAuth(createTag);

@@ -17,11 +17,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 	const { locale } = await params;
 
 	return (
-		<html lang={locale}>
-			<body>
-				<NextIntlClientProvider>{children}</NextIntlClientProvider>
-			</body>
-		</html>
+		<NextIntlClientProvider>{children}</NextIntlClientProvider>
 	);
 }
 

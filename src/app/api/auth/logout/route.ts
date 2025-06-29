@@ -9,7 +9,17 @@ export async function POST(request: NextRequest) {
   try {
     // 쿠키 삭제
     const cookieStore = await cookies();
-    cookieStore.delete('user_id');
+    console.log('Logout - Before delete, user_id cookie:', cookieStore.get('user_id'));
+    
+    cookieStore.set('user_id', '', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 0, // 즉시 만료
+      path: '/',
+    });
+    
+    console.log('Logout - After delete, user_id cookie:', cookieStore.get('user_id'));
 
     return NextResponse.json({ success: true });
   } catch (error) {

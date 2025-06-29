@@ -1,31 +1,14 @@
 import { supabaseAdmin } from '@/shared/libs/supabase';
+import { withAuthToken, type User } from '@/shared/libs/auth';
 import { Octokit } from '@octokit/rest';
-import { cookies } from 'next/headers';
-import { type NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 /**
  * GitHub 저장소 동기화 엔드포인트
  * POST /api/github/sync
  */
-export async function POST() {
+async function syncRepositories(user: User) {
 	try {
-		const cookieStore = await cookies();
-		const userId = cookieStore.get('user_id')?.value;
-
-		if (!userId) {
-			return NextResponse.json({ error: '인증이 필요합니다.' }, { status: 401 });
-		}
-
-		// 사용자 정보 및 GitHub 토큰 가져오기
-		const { data: user, error: userError } = await supabaseAdmin
-			.from('users')
-			.select('access_token, username')
-			.eq('id', userId)
-			.single();
-
-		if (userError || !user?.access_token) {
-			return NextResponse.json({ error: '사용자 정보를 찾을 수 없습니다.' }, { status: 404 });
-		}
 
 		// GitHub API 클라이언트 초기화
 		const octokit = new Octokit({
@@ -54,20 +37,20 @@ export async function POST() {
 			owner: repo.owner?.login || '',
 			name: repo.name,
 			full_name: repo.full_name,
-			description: repo.description,
+			description: repo.description || '',
 			html_url: repo.html_url,
-			private: repo.private,
-			stargazers_count: repo.stargazers_count,
+			private: repo.private || false,
+			stargazers_count: repo.stargazers_count || 0,
 			updated_at_github: repo.updated_at,
 			topics: repo.topics || [],
-			owner_avatar_url: repo.owner?.avatar_url,
+			owner_avatar_url: repo.owner?.avatar_url || '',
 		}));
 
 		// 기존 starred repositories 관계 삭제
 		const { error: deleteStarredError } = await supabaseAdmin
 			.from('user_starred_repos')
 			.delete()
-			.eq('user_id', userId);
+			.eq('user_id', user.id);
 
 		if (deleteStarredError) {
 			console.error('기존 starred repos 삭제 오류:', deleteStarredError);
@@ -90,7 +73,7 @@ export async function POST() {
 		// user_starred_repos 테이블에 관계 생성
 		const starredRelations =
 			upsertedRepos?.map((repo) => ({
-				user_id: userId,
+				user_id: user.id,
 				repository_id: repo.id,
 				starred_at: new Date().toISOString(),
 			})) || [];
@@ -108,7 +91,7 @@ export async function POST() {
 		await supabaseAdmin
 			.from('users')
 			.update({ updated_at: new Date().toISOString() })
-			.eq('id', userId);
+			.eq('id', user.id);
 
 		return NextResponse.json({
 			success: true,
@@ -120,3 +103,5 @@ export async function POST() {
 		return NextResponse.json({ error: '저장소 동기화 중 오류가 발생했습니다.' }, { status: 500 });
 	}
 }
+
+export const POST = withAuthToken(syncRepositories);

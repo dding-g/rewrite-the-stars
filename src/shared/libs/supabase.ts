@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '@/shared/types/database';
 
 // Supabase 클라이언트 인스턴스를 생성하는 함수
@@ -13,13 +13,18 @@ if (!supabaseUrl || !supabaseAnonKey) {
  * 클라이언트용 Supabase 인스턴스
  * 브라우저에서 사용되며 Row Level Security(RLS)를 따름
  */
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
+export const supabase = createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey);
+
+/**
+ * 새로운 Supabase 클라이언트 인스턴스를 생성하는 함수
+ */
+export const createClient = () => createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey);
 
 /**
  * 서버용 Supabase 인스턴스
  * 서버 사이드에서 관리자 권한으로 사용
  */
-export const supabaseAdmin = createClient<Database>(
+export const supabaseAdmin = createSupabaseClient<Database>(
   supabaseUrl,
   process.env.SUPABASE_SERVICE_ROLE_KEY!,
   {
